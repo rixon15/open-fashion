@@ -1,0 +1,27 @@
+spring.application.name=
+
+# Database Connection
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA/Hibernate Configuration
+# Good for development, creates/updates schema
+spring.jpa.hibernate.ddl-auto=update
+# Logs SQL queries to console
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# Spring Boot DevTools
+spring.devtools.livereload.enabled=true
+spring.devtools.restart.enabled=true
+
+# Server Port (default is 8080, but can be changed)
+server.port=8080
+
+# Actuator Configuration
+# Expose common endpoints
+management.endpoints.web.exposure.include=health,info,metrics,httptrace,env,beans
+# Show more details in health check
+management.endpoint.health.show-details=always
