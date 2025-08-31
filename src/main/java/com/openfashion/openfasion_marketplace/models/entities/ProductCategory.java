@@ -36,12 +36,11 @@ public class ProductCategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductCategory that = (ProductCategory) o;
-        return Objects.equals(product, that.product) &&
-                Objects.equals(category, that.category);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(product, category);
+        return Objects.hash(id);
     }
 }

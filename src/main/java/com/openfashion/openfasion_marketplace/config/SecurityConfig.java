@@ -31,13 +31,10 @@ public class SecurityConfig {
 
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        // Permit public endpoints first
-                        .requestMatchers("/api/v1/auth/test").authenticated()
-                        .requestMatchers("/api/v1/auth/logout").authenticated()
+                        // Permit access to specific public endpoints
                         .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register").anonymous()
                         .requestMatchers("/api/v1/products/**").permitAll()
-                        // This rule is no longer needed since everything else is authenticated
-                        // .requestMatchers("test").authenticated()
+                        // All other endpoints require authentication
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

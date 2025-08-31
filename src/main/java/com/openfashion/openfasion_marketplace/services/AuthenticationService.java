@@ -34,6 +34,9 @@ public class AuthenticationService {
         this.jwtService = jwtService;
     }
 
+
+    //Todo: Check for user fields, must contain a username, password and email!
+    //Could do the verification process with an email trough Mailgun
     public User register(User user) {
 
         user.setPassword(encoder.encode(user.getPassword()));
