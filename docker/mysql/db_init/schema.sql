@@ -149,5 +149,14 @@ CREATE TABLE cart (
                       CONSTRAINT uix_cart_user_product_variant UNIQUE (user_id, product_variant_id)
 );
 
+/*----------------------------------------------------------
+-- JWT TOKEN BLACKLIST TABLES
+----------------------------------------------------------*/
+
+CREATE TABLE jwt_blacklist (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    token TEXT
+);
+
 -- Re-enable foreign key checks after all tables are created
 SET FOREIGN_KEY_CHECKS = 1;
