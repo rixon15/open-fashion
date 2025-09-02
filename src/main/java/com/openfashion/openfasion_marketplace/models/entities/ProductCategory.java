@@ -12,8 +12,11 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ProductCategory {
 
+    /*Notes: If we don't initialize the ProductCategoryKey with a noArgsConstructor here, Hibernate will go rouge
+    * and refuse to  work properly
+    */
     @EmbeddedId
-    private ProductCategoryKey id;
+    private ProductCategoryKey id = new ProductCategoryKey();
 
     @ManyToOne
     @MapsId("productId")
