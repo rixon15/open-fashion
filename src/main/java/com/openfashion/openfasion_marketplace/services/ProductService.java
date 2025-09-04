@@ -31,6 +31,8 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
+    //Todo: Create stripe products as well after the payment integration (StripeService)
+
     @Transactional
     public String addProduct(ProductRequestDto productRequestDto){
         Product product = new Product();
