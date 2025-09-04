@@ -22,9 +22,27 @@ public class ColorController {
         return colorService.addColor(colorRequestDto);
     }
 
-    @GetMapping("/{id}")
-    public ColorResponseDto getColor(@PathVariable Long id) {
-        return colorService.getColor(id);
+    //@GetMapping("/{id}")
+    //public ColorResponseDto getColor(@PathVariable Long id) {
+    //    return colorService.getColor(id);
+    //}
+
+    @GetMapping("/{value}")
+    public ColorResponseDto getColor(@PathVariable String value) {
+        long id;
+
+        try {
+            id = Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            id = 0;
+            System.out.println(e.getMessage());
+        }
+
+        if(id > 0) {
+            return colorService.getColorById(id);
+        } else {
+            return colorService.getColorByName(value);
+        }
     }
 
     @GetMapping("/all")

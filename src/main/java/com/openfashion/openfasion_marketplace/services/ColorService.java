@@ -38,7 +38,7 @@ public class ColorService {
 
     }
 
-    public ColorResponseDto getColor(Long id) {
+    public ColorResponseDto getColorById(Long id) {
 
         Color existingColor = colorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Color not found"));
@@ -77,5 +77,14 @@ public class ColorService {
         colorRepository.save(existingColor);
 
         return "Color updated successfully";
+    }
+
+    public ColorResponseDto getColorByName(String value) {
+
+        Color existingColor = colorRepository.findByName(value)
+                .orElseThrow(() -> new RuntimeException("Color not found"));
+
+        return colorMapper.toColorResponseDto(existingColor);
+
     }
 }
