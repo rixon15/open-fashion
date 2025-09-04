@@ -10,7 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ColorMapper {
 
-    @Mapping(target = "color", source = "color")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "hex_code", source = "hex_code")
     ColorResponseDto toColorResponseDto(Color color);
 
     List<ColorResponseDto> toColorResponseDtoList(List<Color> colors);
