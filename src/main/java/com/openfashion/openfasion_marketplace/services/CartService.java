@@ -5,6 +5,7 @@ import com.openfashion.openfasion_marketplace.models.entities.Cart;
 import com.openfashion.openfasion_marketplace.models.entities.CartItem;
 import com.openfashion.openfasion_marketplace.models.entities.ProductVariant;
 import com.openfashion.openfasion_marketplace.models.entities.User;
+import com.openfashion.openfasion_marketplace.repositories.CartItemRepository;
 import com.openfashion.openfasion_marketplace.repositories.CartRepository;
 import com.openfashion.openfasion_marketplace.repositories.ProductVariantRepository;
 import com.openfashion.openfasion_marketplace.repositories.UserRepository;
@@ -22,12 +23,14 @@ public class CartService {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final ProductVariantRepository productVariantRepository;
+    private final CartItemRepository cartItemRepository;
 
-    public CartService(AuthenticationService authenticationService, UserRepository userRepository, CartRepository cartRepository, ProductVariantRepository productVariantRepository) {
+    public CartService(AuthenticationService authenticationService, UserRepository userRepository, CartRepository cartRepository, ProductVariantRepository productVariantRepository, CartItemRepository cartItemRepository) {
         this.authenticationService = authenticationService;
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.productVariantRepository = productVariantRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
     @Transactional
@@ -36,9 +39,12 @@ public class CartService {
         User currentUser = userRepository.findByUsername(authenticationService.currentUser())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+
+
         ProductVariant product = productVariantRepository.findById(cartRequestDto.getId())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
+        System.out.println("product: " + product);
 
 
         //Check if current user has a cart
@@ -75,7 +81,8 @@ public class CartService {
 
         if (currentCartOptional.isPresent()) {
             Cart currentCart = currentCartOptional.get();
-            boolean removeFlag = currentCart.getCartItems().removeIf(cartItem -> cartItem.getId().equals(id));
+            boolean removeFlag = currentCart.getCartItems().removeIf(
+                    cartItem -> cartItem.getProductVariant().getId().equals(id));
             if(removeFlag) {
                 cartRepository.save(currentCart);
                 return "Product Successfully deleted from Cart";
@@ -87,7 +94,7 @@ public class CartService {
         }
     }
 
-    public String updateItem(Long id, int quantity) {
+    public String updateItem(Long id, Integer quantity) {
         User currentUser = userRepository.findByUsername(authenticationService.currentUser())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -96,10 +103,13 @@ public class CartService {
         if(currentCartOptional.isPresent()) {
             Cart currentCart = currentCartOptional.get();
             CartItem cartItem = currentCart.getCartItems().stream().filter(
-                    item -> item.getId().equals(id)).findFirst().orElse(null);
+                    item -> item.getProductVariant().getId().equals(id)).findFirst().orElse(null);
+
+            //System.out.println("cartItem: " + cartItem);
 
             if(cartItem != null && quantity >= 1) {
                 cartItem.setQuantity(quantity);
+                cartItemRepository.save(cartItem);
                 return "Product Successfully updated";
             } else if(quantity <= 0) {
                 throw new RuntimeException("Quantity should be greater than zero");

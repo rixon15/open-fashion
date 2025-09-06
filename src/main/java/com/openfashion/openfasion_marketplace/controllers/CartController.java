@@ -25,9 +25,9 @@ public class CartController {
         return cartService.deleteItem(id);
     }
 
-    @PutMapping("/{id}")
-    public String updateItem(@PathVariable Long id, @RequestBody int quantity) {
-        return cartService.updateItem(id, quantity);
+    @PutMapping("/")
+    public String updateItem(@RequestBody CartRequestDto cartRequestDto) {
+        return cartService.updateItem(cartRequestDto.getId(), cartRequestDto.getQuantity());
     }
 
 }

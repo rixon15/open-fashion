@@ -2,6 +2,7 @@ package com.openfashion.openfasion_marketplace.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -28,6 +29,8 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductVariant> variants;
 
+
     @OneToMany(mappedBy = "product")
+    @ToString.Exclude
     private Set<ProductCategory> productCategories = new HashSet<>();
 }

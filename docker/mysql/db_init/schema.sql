@@ -175,7 +175,7 @@ CREATE TABLE order_item (
                              order_id BIGINT NOT NULL,
                              product_variant_id BIGINT NOT NULL,
                              quantity INT NOT NULL,
-                             price_at_purchase DECIMAL(10, 2) NOT NULL, -- The price of the product at the time of purchase
+                             price_at_purchase DECIMAL(10, 2) NOT NULL,
                              created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign keys to link the item to an order and a product variant

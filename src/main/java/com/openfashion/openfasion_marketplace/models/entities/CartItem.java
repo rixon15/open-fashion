@@ -2,10 +2,12 @@ package com.openfashion.openfasion_marketplace.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "cart_item")
+@EqualsAndHashCode(exclude = "cart")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
