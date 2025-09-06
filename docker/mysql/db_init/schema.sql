@@ -156,6 +156,47 @@ CREATE TABLE cart_item (
 );
 
 /*----------------------------------------------------------
+-- ORDERS TABLES
+----------------------------------------------------------*/
+CREATE TABLE `order` (
+                        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                        user_id BIGINT NOT NULL,
+                        status VARCHAR(50) NOT NULL DEFAULT 'PENDING', -- e.g., 'PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'
+                        total_price DECIMAL(10, 2) NOT NULL,
+                        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    -- Foreign key to link the order to a user
+                        CONSTRAINT fk_orders_user_id FOREIGN KEY (user_id) REFERENCES `user`(id) ON DELETE CASCADE
+);
+
+CREATE TABLE order_item (
+                             id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                             order_id BIGINT NOT NULL,
+                             product_variant_id BIGINT NOT NULL,
+                             quantity INT NOT NULL,
+                             price_at_purchase DECIMAL(10, 2) NOT NULL, -- The price of the product at the time of purchase
+                             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    -- Foreign keys to link the item to an order and a product variant
+                             CONSTRAINT fk_order_items_order_id FOREIGN KEY (order_id) REFERENCES `order`(id) ON DELETE CASCADE,
+                             CONSTRAINT fk_order_items_product_variant_id FOREIGN KEY (product_variant_id) REFERENCES product_variant(id) ON DELETE RESTRICT
+);
+
+CREATE TABLE shipping_detail (
+                                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                  order_id BIGINT UNIQUE NOT NULL, -- Each order has one set of shipping details
+                                  address_line_1 VARCHAR(255) NOT NULL,
+                                  address_line_2 VARCHAR(255),
+                                  city VARCHAR(100) NOT NULL,
+                                  state_province VARCHAR(100),
+                                  postal_code VARCHAR(20) NOT NULL,
+                                  country VARCHAR(100) NOT NULL,
+
+                                  CONSTRAINT fk_shipping_details_order_id FOREIGN KEY (order_id) REFERENCES `order`(id) ON DELETE CASCADE
+);
+
+/*----------------------------------------------------------
 -- JWT TOKEN BLACKLIST TABLES
 ----------------------------------------------------------*/
 
