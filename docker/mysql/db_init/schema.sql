@@ -136,17 +136,23 @@ CREATE TABLE product_category (
 
 CREATE TABLE cart (
                       id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                      user_id BIGINT NOT NULL,
-                      product_variant_id BIGINT NOT NULL,
-                      quantity INT NOT NULL DEFAULT 1,
+                      user_id BIGINT NOT NULL UNIQUE, -- Ensures a user has only one cart
                       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                       updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                      CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES `user`(id) ON DELETE CASCADE
+);
 
-                      CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES `user`(id) ON DELETE CASCADE,
-                      CONSTRAINT fk_cart_product_variant_id FOREIGN KEY (product_variant_id) REFERENCES product_variant(id) ON DELETE CASCADE,
-
-    -- A user can only have one of each product variant in their cart (quantity handled by the 'quantity' column)
-                      CONSTRAINT uix_cart_user_product_variant UNIQUE (user_id, product_variant_id)
+CREATE TABLE cart_item (
+                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           cart_id BIGINT NOT NULL,
+                           product_variant_id BIGINT NOT NULL,
+                           quantity INT NOT NULL DEFAULT 1 CHECK (quantity > 0),
+                           created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                           updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                           CONSTRAINT fk_cart_item_cart_id FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
+                           CONSTRAINT fk_cart_item_product_variant_id FOREIGN KEY (product_variant_id) REFERENCES product_variant(id) ON DELETE RESTRICT,
+    -- Ensures a product variant is only listed once per cart
+                           CONSTRAINT uix_cart_item_variant UNIQUE (cart_id, product_variant_id)
 );
 
 /*----------------------------------------------------------

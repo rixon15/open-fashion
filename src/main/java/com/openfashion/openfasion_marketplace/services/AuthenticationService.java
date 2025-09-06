@@ -9,10 +9,10 @@ import com.openfashion.openfasion_marketplace.repositories.UserRoleRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthenticationService {
@@ -60,9 +60,10 @@ public class AuthenticationService {
 
         if(authentication.isAuthenticated()) {
 
-            Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
+            User userOptional = userRepository.findByUsername(user.getUsername())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
 
-            return jwtService.generateToken(String.valueOf(userOptional.get().getId()));
+            return jwtService.generateToken(String.valueOf(userOptional.getId()));
         } else {
             return "fail";
         }
@@ -70,6 +71,23 @@ public class AuthenticationService {
 
     public void logout(String token) {
         jwtService.revokeToken(token);
+    }
+
+    public String currentUser() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication == null || !authentication.isAuthenticated()) {
+            return "No user is currently authenticated";
+        }
+
+        Object principal = authentication.getPrincipal();
+        if(principal instanceof UserDetails user) {
+            return user.getUsername();
+        } else {
+            return principal.toString();
+        }
+
     }
 
 }
