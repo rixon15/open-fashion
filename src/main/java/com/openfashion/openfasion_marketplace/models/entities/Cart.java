@@ -3,13 +3,15 @@ package com.openfashion.openfasion_marketplace.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "cart")
-@EqualsAndHashCode(exclude = "cartItems")
+@EqualsAndHashCode(exclude = {"cartItems", "user"})
+@ToString(exclude = "user")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

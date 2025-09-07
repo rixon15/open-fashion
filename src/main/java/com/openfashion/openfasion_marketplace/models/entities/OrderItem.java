@@ -2,12 +2,16 @@ package com.openfashion.openfasion_marketplace.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 
 @Data
 @Entity
 @Table(name = "order_item")
+@EqualsAndHashCode(of = "id")
+@ToString(exclude = "order")
 public class OrderItem {
 
     @Id

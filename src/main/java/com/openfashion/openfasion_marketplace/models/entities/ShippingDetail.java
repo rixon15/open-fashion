@@ -3,10 +3,14 @@ package com.openfashion.openfasion_marketplace.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @Entity
 @Table(name = "shipping_detail")
+@EqualsAndHashCode(exclude = "order")
+@ToString(exclude = "order")
 public class ShippingDetail {
 
     @Id
