@@ -19,7 +19,6 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    //private static final String SECRET = "c71d7eccc0dc8c401a26cbb4991991e9e9f8bbdc712341d5c58208f87459e57e";
 
     private final String secretKey;
     private final UserRepository userRepository;

@@ -2,6 +2,9 @@ package com.openfashion.openfasion_marketplace.controllers;
 
 import com.openfashion.openfasion_marketplace.models.entities.User;
 import com.openfashion.openfasion_marketplace.services.AuthenticationService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,10 +18,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {return authenticationService.register(user);}
+    public User register(@Validated @RequestBody User user) {return authenticationService.register(user);}
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {return authenticationService.login(user);}
+    public String login(@Validated @RequestBody User user) {return authenticationService.login(user);}
 
     @PostMapping("/logout")
     public String logout(@RequestHeader("Authorization") String token) {
@@ -26,6 +29,7 @@ public class AuthenticationController {
         return "Logged out successfully";
     }
 
+
     @GetMapping("/test")
-    public String test() {return "TEST";}
+    public String test() {return "test";}
 }
