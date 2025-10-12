@@ -7,6 +7,7 @@ import com.openfashion.openfasion_marketplace.repositories.RoleRepository;
 import com.openfashion.openfasion_marketplace.repositories.UserRepository;
 import com.openfashion.openfasion_marketplace.repositories.UserRoleRepository;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -66,7 +67,7 @@ public class AuthenticationService {
 
             return jwtService.generateToken(String.valueOf(userOptional.getId()));
         } else {
-            return "fail";
+            throw new BadCredentialsException("Authentication failed for user: " + user.getUsername());
         }
     }
 
