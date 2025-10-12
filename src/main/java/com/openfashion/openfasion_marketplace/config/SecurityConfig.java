@@ -3,10 +3,10 @@ package com.openfashion.openfasion_marketplace.config;
 import com.openfashion.openfasion_marketplace.services.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,9 +14,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -28,7 +25,7 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2JwtSuccessHandler oAuth2JwtSuccessHandler;
 
-    public SecurityConfig(JwtFilter jwtFilter, OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService, CustomOAuth2UserService customOAuth2UserService, OAuth2JwtSuccessHandler oAuth2JwtSuccessHandler) {
+    public SecurityConfig(JwtFilter jwtFilter, CustomOAuth2UserService customOAuth2UserService, OAuth2JwtSuccessHandler oAuth2JwtSuccessHandler) {
         this.jwtFilter = jwtFilter;
         this.customOAuth2UserService = customOAuth2UserService;
         this.oAuth2JwtSuccessHandler = oAuth2JwtSuccessHandler;
@@ -43,10 +40,33 @@ public class SecurityConfig {
 
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        // Permit access to specific public endpoints
+
                         .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register").anonymous()
-                        .requestMatchers("/api/v1/products/**", "/oauth2/**", "/login/oauth2/code/**", "/api/v1/auth/oauth2/success").permitAll()
-                        // All other endpoints require authentication
+
+                        .requestMatchers(
+                                "/api/v1/products/all",
+                                "/api/v1/color/all",
+                                "/api/v1/size/all",
+                                "/oauth2/**",
+                                "/login/oauth2/code/**",
+                                "/api/v1/auth/oauth2/success"
+                        ).permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products/{id}").permitAll()
+
+
+                        .requestMatchers(
+                                "/api/v1/category/**",
+                                "/api/v1/color/**",
+                                "/api/v1/size/**",
+                                "/api/v1/products/add",
+                                "/api/v1/products/delete"
+
+                        ).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/products/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/{id}").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/cart/**", "/api/v1/order/**").hasAnyRole("USER", "ADMIN")
+
                         .anyRequest().authenticated())
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
