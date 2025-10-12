@@ -11,8 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,25 +23,24 @@ public class AuthenticationService {
     private final UserRoleRepository userRoleRepository;
     private final RoleRepository roleRepository;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public AuthenticationService(UserRepository userRepository, UserRoleRepository userRoleRepository,
                                  RoleRepository roleRepository, AuthenticationManager authenticationManager,
-                                 JwtService jwtService) {
+                                 JwtService jwtService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.roleRepository = roleRepository;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
-    //Todo: Check for user fields, must contain a username, password and email!
-    //Could do the verification process with an email trough Mailgun
     public User register(User user) {
 
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User savedUser = userRepository.save(user);
 

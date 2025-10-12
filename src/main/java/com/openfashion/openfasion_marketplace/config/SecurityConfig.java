@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -24,17 +24,19 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2JwtSuccessHandler oAuth2JwtSuccessHandler;
+    private final PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(JwtFilter jwtFilter, CustomOAuth2UserService customOAuth2UserService, OAuth2JwtSuccessHandler oAuth2JwtSuccessHandler) {
+    public SecurityConfig(JwtFilter jwtFilter, CustomOAuth2UserService customOAuth2UserService, OAuth2JwtSuccessHandler oAuth2JwtSuccessHandler, PasswordEncoder passwordEncoder) {
         this.jwtFilter = jwtFilter;
         this.customOAuth2UserService = customOAuth2UserService;
         this.oAuth2JwtSuccessHandler = oAuth2JwtSuccessHandler;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        /* Due to being a stateless app, userInfoEndpoint is rather instabile thats why we moved our verification logic
+        /* Due to being a stateless app, userInfoEndpoint is rather instable that's why we moved our verification logic
            oAuth2JwtSuccessHandler
         * */
 
@@ -80,7 +82,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-        authProvider.setPasswordEncoder(new BCryptPasswordEncoder(10));
+        authProvider.setPasswordEncoder(passwordEncoder);
 
         return authProvider;
     }
