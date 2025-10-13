@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductVariantRepository extends JpaRepository<ProductVariant, Long> {
 
-    void deleteAllByProductId(Long productId);
+    void deleteAllByCatalogItemId(Long catalogItemId);
 
 }

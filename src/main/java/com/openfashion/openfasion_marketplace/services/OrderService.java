@@ -57,7 +57,7 @@ public class OrderService {
            OrderItem orderItem = orderMapper.toOrderItem(itemDto);
 
            orderItem.setProductVariant(productVariant);
-           orderItem.setPriceAtPurchase(productVariant.getProduct().getPrice());
+           orderItem.setPriceAtPurchase(productVariant.getCatalogItem().getPrice());
            orderItem.setOrder(order);
 
            orderItems.add(orderItem);
@@ -131,7 +131,7 @@ public class OrderService {
                 orderItem.setProductVariant(productVariant);
                 orderItem.setQuantity(itemDto.getQuantity());
 
-                orderItem.setPriceAtPurchase(productVariant.getProduct().getPrice());
+                orderItem.setPriceAtPurchase(productVariant.getCatalogItem().getPrice());
                 orderItem.setOrder(existingOrder);
 
                 existingOrder.getItems().add(orderItem);
@@ -170,7 +170,7 @@ public class OrderService {
         OrderItem orderItem = orderMapper.toOrderItem(orderItemDto);
         orderItem.setProductVariant(productVariant);
         orderItem.setOrder(currentOrder);
-        orderItem.setPriceAtPurchase(productVariant.getProduct().getPrice());
+        orderItem.setPriceAtPurchase(productVariant.getCatalogItem().getPrice());
 
 
         currentOrder.getItems().add(orderItem);

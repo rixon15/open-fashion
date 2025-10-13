@@ -1,12 +1,12 @@
 # Open Fashion Marketplace Backend
 
-This project serves as the backend for a modern online fashion store. It's a robust and secure RESTful API built with Spring Boot, designed to handle the core logic for product management, user authentication, and shopping cart functionality. This backend is ready to be paired with any frontend application to create a complete e-commerce solution.
+This project serves as the backend for a modern online fashion store. It's a robust and secure RESTful API built with Spring Boot, designed to handle the core logic for catalogItem management, user authentication, and shopping cart functionality. This backend is ready to be paired with any frontend application to create a complete e-commerce solution.
 
 ## Features
 
 -   **Secure Authentication:** Implemented JSON Web Token (JWT) authentication using Spring Security to protect endpoints and manage user sessions.
 -   **User & Role Management:** Manages user accounts and assigns roles (`USER`, `ADMIN`) to control access to specific API resources.
--   **Product Catalog Management:** A comprehensive system for managing a product catalog, including support for various sizes and colors as distinct product variants.
+-   **Product Catalog Management:** A comprehensive system for managing a catalogItem catalog, including support for various sizes and colors as distinct catalogItem variants.
 -   **Transactional Data Operations:** Ensures data integrity for all CRUD operations on products, categories, colors, and sizes.
 -   **Scalable Architecture:** Designed with a service-oriented approach, separating business logic from controllers and repositories.
 
@@ -64,7 +64,7 @@ The API is structured under the `/api/v1/` base path. Key endpoints include:
 
 -   `/api/v1/auth`: User registration, login, and logout.
 -   `/api/v1/products`: Publicly accessible endpoints for browsing products.
--   `/api/v1/category`, `/api/v1/color`, `/api/v1/size`: Endpoints for managing product-related data. Access to these is secured by Spring Security.
+-   `/api/v1/category`, `/api/v1/color`, `/api/v1/size`: Endpoints for managing catalogItem-related data. Access to these is secured by Spring Security.
 
 ## Project Status
 

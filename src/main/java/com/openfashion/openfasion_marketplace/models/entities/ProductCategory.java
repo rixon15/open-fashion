@@ -19,20 +19,20 @@ public class ProductCategory {
     private ProductCategoryKey id = new ProductCategoryKey();
 
     @ManyToOne
-    @MapsId("productId")
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @MapsId("catalogItemId")
+    @JoinColumn(name = "catalog_item_id")
+    private CatalogItem catalogItem;
 
     @ManyToOne
     @MapsId("categoryId")
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public ProductCategory(Product product, Category category) {
-        this.product = product;
-        this.category = category;
-        this.id = new ProductCategoryKey(product.getId(), category.getId());
-    }
+//    public ProductCategory(CatalogItem catalogItem, Category category) {
+//        this.catalogItem = catalogItem;
+//        this.category = category;
+//        this.id = new ProductCategoryKey(catalogItem.getId(), category.getId());
+//    }
 
     @Override
     public boolean equals(Object o) {

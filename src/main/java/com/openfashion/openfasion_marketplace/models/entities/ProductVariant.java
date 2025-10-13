@@ -2,12 +2,8 @@ package com.openfashion.openfasion_marketplace.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @Data
 @Entity
 @Table(name = "product_variant")
@@ -20,7 +16,7 @@ public class ProductVariant {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     @ToString.Exclude
-    private Product product;
+    private CatalogItem catalogItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "color_id", nullable = false)
@@ -32,8 +28,9 @@ public class ProductVariant {
 
     @Column(nullable = false)
     private Integer stockQuantity;
-
     @Column(nullable = false)
     private String sku;
+    @Column(nullable = false)
+    private Long stripeId;
 
 }

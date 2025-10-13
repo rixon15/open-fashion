@@ -11,8 +11,8 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "catalog_item")
+public class CatalogItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,12 +25,14 @@ public class Product {
     private String name;
     @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private Long stripeId;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "catalogItem", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductVariant> variants;
 
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "catalogItem")
     @ToString.Exclude
     private Set<ProductCategory> productCategories = new HashSet<>();
 }
