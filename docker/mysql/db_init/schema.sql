@@ -68,11 +68,11 @@ CREATE TABLE user_role (
 -- PRODUCT CATALOG TABLES
 ----------------------------------------------------------*/
 
-CREATE TABLE product (
+CREATE TABLE catalogItem (
                          id BIGINT AUTO_INCREMENT PRIMARY KEY,
                          price DECIMAL(10, 2) NOT NULL, -- Use DECIMAL for monetary values to avoid floating-point inaccuracies
                          brand VARCHAR(50) NOT NULL,
-                         name VARCHAR(255) NOT NULL, -- Increased length for product names
+                         name VARCHAR(255) NOT NULL, -- Increased length for catalogItem names
                          description TEXT NOT NULL,
                          created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -99,11 +99,11 @@ CREATE TABLE product_variant (
                                  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-                                 CONSTRAINT fk_product_variant_product_id FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+                                 CONSTRAINT fk_product_variant_product_id FOREIGN KEY (product_id) REFERENCES catalogItem(id) ON DELETE CASCADE,
                                  CONSTRAINT fk_product_variant_color_id FOREIGN KEY (color_id) REFERENCES color(id) ON DELETE RESTRICT,
                                  CONSTRAINT fk_product_variant_size_id FOREIGN KEY (size_id) REFERENCES size(id) ON DELETE RESTRICT,
 
-    -- Ensure uniqueness for a product with a specific color and size combination
+    -- Ensure uniqueness for a catalogItem with a specific color and size combination
                                  CONSTRAINT uix_product_variant_options UNIQUE (product_id, color_id, size_id)
 );
 
@@ -126,7 +126,7 @@ CREATE TABLE product_category (
                                   category_id BIGINT NOT NULL,
 
                                   CONSTRAINT pk_product_category PRIMARY KEY (product_id, category_id),
-                                  CONSTRAINT fk_product_category_product_id FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+                                  CONSTRAINT fk_product_category_product_id FOREIGN KEY (product_id) REFERENCES catalogItem(id) ON DELETE CASCADE,
                                   CONSTRAINT fk_product_category_category_id FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE
 );
 
@@ -151,7 +151,7 @@ CREATE TABLE cart_item (
                            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                            CONSTRAINT fk_cart_item_cart_id FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
                            CONSTRAINT fk_cart_item_product_variant_id FOREIGN KEY (product_variant_id) REFERENCES product_variant(id) ON DELETE RESTRICT,
-    -- Ensures a product variant is only listed once per cart
+    -- Ensures a catalogItem variant is only listed once per cart
                            CONSTRAINT uix_cart_item_variant UNIQUE (cart_id, product_variant_id)
 );
 
@@ -178,7 +178,7 @@ CREATE TABLE order_item (
                              price_at_purchase DECIMAL(10, 2) NOT NULL,
                              created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    -- Foreign keys to link the item to an order and a product variant
+    -- Foreign keys to link the item to an order and a catalogItem variant
                              CONSTRAINT fk_order_items_order_id FOREIGN KEY (order_id) REFERENCES `order`(id) ON DELETE CASCADE,
                              CONSTRAINT fk_order_items_product_variant_id FOREIGN KEY (product_variant_id) REFERENCES product_variant(id) ON DELETE RESTRICT
 );

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDto {
+public class CatalogItemResponseDto {
 
     //Notes: We are using nested DTOs for building the Response object to fix the following concerns:
     //Serialization issues -> Lazy-loaded fields

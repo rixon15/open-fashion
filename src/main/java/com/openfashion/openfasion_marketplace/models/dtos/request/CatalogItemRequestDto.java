@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductRequestDto {
+public class CatalogItemRequestDto {
 
     private BigDecimal price;
     private String brand;

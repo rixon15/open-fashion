@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ProductCategoryKey implements Serializable {
 
-    private Long productId;
+    private Long catalogItemId;
     private Long categoryId;
 
     // It's crucial to override equals() and hashCode() for composite keys!!!!!!
@@ -23,12 +23,12 @@ public class ProductCategoryKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductCategoryKey that = (ProductCategoryKey) o;
-        return Objects.equals(productId, that.productId) &&
+        return Objects.equals(catalogItemId, that.catalogItemId) &&
                 Objects.equals(categoryId, that.categoryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, categoryId);
+        return Objects.hash(catalogItemId, categoryId);
     }
 }
