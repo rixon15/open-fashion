@@ -35,6 +35,8 @@ public class User {
     private String first_name;
     @Column
     private String last_name;
+    @Column
+    private Long stripeID;
 
     // The mappedBy attribute indicates that the user entity is the owner of the relationship
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
