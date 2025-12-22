@@ -11,6 +11,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./backend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,27 +25,30 @@ jobs:
           java-version: '25'
           distribution: 'zulu'
           cache: maven
+          cache-dependency-path: ./backend/pom.xml
 
       - name: Build and Install API Module
         run: |
           ./mvnw clean install -pl open-fashion-api_v1 -am -DskipTests
-        working-directory: .
 
       - name: Build and Test Entire Project
         run: ./mvnw clean verify
-        working-directory: .
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: ${{ !env.ACT }}
         with:
-          report_paths: '**/target/surefire-reports/TEST-*.xml'
+          report_paths: '**/backend/**/target/surefire-reports/TEST-*.xml'
 
   #CD STAGE: Docked Build & Push (only runs on main if tests pass)
   docker-build:
     needs: build-and-test
-    if: github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend
 
     steps:
       - name: Checkout code
@@ -66,7 +73,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./open-fashion-backend
-          file: ./open-fashion-backend/Dockerfile
+          context: ./backend/open-fashion-backend
+          file: ./backend/open-fashion-backend/Dockerfile
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/open-fashion-backend
