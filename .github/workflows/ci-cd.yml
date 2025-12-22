@@ -43,7 +43,7 @@ jobs:
   #CD STAGE: Docked Build & Push (only runs on main if tests pass)
   docker-build:
     needs: build-and-test
-    #if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     defaults:
