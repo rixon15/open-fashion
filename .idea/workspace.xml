@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="90902dbb-1110-464e-84ff-fafc04ec06fe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/db_init/schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/spring/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/OpenFashionMarketplaceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/config/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/config/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/config/OAuth2JwtSuccessHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/config/PasswordEncoderConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/AuthenticationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/CartController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/CatalogItemController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/CategoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/ColorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/OrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/controllers/SizeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/CartRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/CatalogItemRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/CategoryRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/ColorRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/DeleteCategoryRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/OrderItemDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/OrderRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/ProductVariantRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/request/ShippingDetailsDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/response/CatalogItemResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/response/ColorResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/response/ProductVariantResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/dtos/response/SizeResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/Cart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/CartItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/CatalogItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/Color.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/JwtBlacklist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/OrderItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/OrderStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/ProductCategory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/ProductCategoryKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/ProductVariant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/ShippingDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/Size.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/UserRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/UserRoleKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/entities/UserSocialAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/mappers/CatalogItemMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/mappers/ColorMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/mappers/OrderMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/models/mappers/SizeMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/CartItemRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/CartRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/CatalogItemRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/CategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/ColorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/JwtBlacklistRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/OrderRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/ProductCategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/ProductVariantRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/RoleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/SizeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/repositories/UserRoleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/AuthenticationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/CartService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/CatalogItemService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/CategoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/ColorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/CustomOAuth2UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/MyUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/OrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/SizeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/openfashion/openfasion_marketplace/services/StripeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/openfashion/openfasion_marketplace/OpenfasionMarketplaceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;rixon15&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/rixon15/open-fashion.git&quot;,
+    &quot;accountId&quot;: &quot;fad41a75-ed15-4d3f-8993-6a8f25f74373&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="37DELhG8zgw7pGQIjoqdKDlcD58" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "greenfield-rewrite-api-first",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90902dbb-1110-464e-84ff-fafc04ec06fe" name="Changes" comment="" />
+      <created>1766429190758</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766429190758</updated>
+      <workItem from="1766429335859" duration="2023000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

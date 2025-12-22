@@ -1,0 +1,635 @@
+openapi: 3.0.3
+info:
+  title: Open Fashion Marketplace API
+  description: |
+    A robust e-commerce backend API for the Open Fashion Marketplace.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@openfashion.com
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local Development Server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # --- Common Types ---
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: "Invalid request"
+        details:
+          type: string
+
+    # --- Authentication ---
+    UserRegistration:
+      type: object
+      required:
+        - username
+        - password
+        - email
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          minLength: 8
+        first_name:
+          type: string
+        last_name:
+          type: string
+
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+
+    AuthResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        token:
+          type: string
+
+    # --- Attributes (Color/Size) ---
+    Color:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        hex_code:
+          type: string
+          pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$'
+
+    # Renamed from 'Size' to 'ClothingSize' to avoid Java annotation conflict
+    ClothingSize:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+
+    # --- Category ---
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        parent_id:
+          type: integer
+          format: int64
+          nullable: true
+
+    CategoryRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        parent:
+          type: string
+          description: Name of the parent category (optional)
+
+    # --- Product Catalog ---
+    ProductVariant:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        stockQuantity:
+          type: integer
+        color:
+          $ref: '#/components/schemas/Color'
+        size:
+          $ref: '#/components/schemas/ClothingSize'
+
+    ProductVariantRequest:
+      type: object
+      required:
+        - sku
+        - colorName
+        - sizeName
+      properties:
+        sku:
+          type: string
+        stockQuantity:
+          type: integer
+        colorName:
+          type: string
+        sizeName:
+          type: string
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        brand:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: double
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductVariant'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+
+    ProductRequest:
+      type: object
+      required:
+        - name
+        - price
+        - brand
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        brand:
+          type: string
+        price:
+          type: number
+          format: double
+        categoryNames:
+          type: array
+          items:
+            type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductVariantRequest'
+
+    # --- Cart ---
+    CartItemRequest:
+      type: object
+      required:
+        - productVariantId
+        - quantity
+      properties:
+        productVariantId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          minimum: 1
+
+    # --- Order ---
+    ShippingDetails:
+      type: object
+      required:
+        - addressLine1
+        - city
+        - postalCode
+        - country
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+
+    OrderItemRequest:
+      type: object
+      properties:
+        productVariantId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+
+    OrderRequest:
+      type: object
+      required:
+        - items
+        - shippingDetails
+      properties:
+        status:
+          type: string
+          enum: [PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED]
+        shippingDetails:
+          $ref: '#/components/schemas/ShippingDetails'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemRequest'
+
+security:
+  - bearerAuth: []
+
+paths:
+  # ---------------------
+  # Authentication
+  # ---------------------
+  /auth/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      security: []
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        '200':
+          description: User registered successfully
+        '400':
+          description: Validation error
+
+  /auth/login:
+    post:
+      summary: Authenticate user and return JWT
+      operationId: loginUser
+      security: []
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: JWT Token generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Bad credentials
+
+  /auth/logout:
+    post:
+      summary: Logout user
+      operationId: logoutUser
+      tags: [Authentication]
+      responses:
+        '200':
+          description: Logged out successfully
+
+  # ---------------------
+  # Catalog (Products)
+  # ---------------------
+  /products:
+    get:
+      summary: List all products
+      operationId: getAllProducts
+      security: []
+      tags: [Products]
+      responses:
+        '200':
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Create a new product
+      operationId: createProduct
+      tags: [Products]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '201':
+          description: Product created
+
+  /products/{id}:
+    get:
+      summary: Get product by ID
+      operationId: getProductById
+      security: []
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    put:
+      summary: Update a product
+      operationId: updateProduct
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: Product updated
+    delete:
+      summary: Delete a product
+      operationId: deleteProduct
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Product deleted
+
+  # ---------------------
+  # Categories
+  # ---------------------
+  /categories:
+    post:
+      summary: Create a category
+      operationId: createCategory
+      tags: [Categories]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryRequest'
+      responses:
+        '200':
+          description: Category created
+
+  /categories/{id}:
+    delete:
+      summary: Delete a category
+      operationId: deleteCategory
+      tags: [Categories]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Category deleted
+
+  # ---------------------
+  # Attributes (Colors/Sizes)
+  # ---------------------
+  /colors:
+    get:
+      summary: List all colors
+      operationId: getAllColors
+      security: []
+      tags: [Attributes]
+      responses:
+        '200':
+          description: List of colors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Color'
+    post:
+      summary: Add a new color
+      operationId: createColor
+      tags: [Attributes]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                hex_code:
+                  type: string
+      responses:
+        '200':
+          description: Color added
+
+  /sizes:
+    get:
+      summary: List all sizes
+      operationId: getAllSizes
+      security: []
+      tags: [Attributes]
+      responses:
+        '200':
+          description: List of sizes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClothingSize'
+    post:
+      summary: Add a new size
+      operationId: createSize
+      tags: [Attributes]
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "XL"
+      responses:
+        '200':
+          description: Size added
+
+  # ---------------------
+  # Shopping Cart
+  # ---------------------
+  /cart/items:
+    post:
+      summary: Add item to current user's cart
+      operationId: addItemToCart
+      tags: [Cart]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemRequest'
+      responses:
+        '200':
+          description: Item added to cart
+
+  /cart/items/{productVariantId}:
+    put:
+      summary: Update cart item quantity
+      operationId: updateCartItem
+      tags: [Cart]
+      parameters:
+        - in: path
+          name: productVariantId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+      responses:
+        '200':
+          description: Cart item updated
+    delete:
+      summary: Remove item from cart
+      operationId: removeCartItem
+      tags: [Cart]
+      parameters:
+        - in: path
+          name: productVariantId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Item removed
+
+  # ---------------------
+  # Orders
+  # ---------------------
+  /orders:
+    post:
+      summary: Create/Place a new order
+      operationId: placeOrder
+      tags: [Orders]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '200':
+          description: Order placed successfully
+
+  /orders/{id}:
+    put:
+      summary: Update an order (Admin - status/shipping)
+      operationId: updateOrder
+      tags: [Orders]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '200':
+          description: Order updated
+    delete:
+      summary: Delete an order
+      operationId: deleteOrder
+      tags: [Orders]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Order deleted
+
+  /orders/{orderId}/items:
+    post:
+      summary: Add an item to an existing order
+      operationId: addOrderItem
+      tags: [Orders]
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderItemRequest'
+      responses:
+        '200':
+          description: Item added to order
