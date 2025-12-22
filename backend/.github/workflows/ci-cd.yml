@@ -1,0 +1,72 @@
+name: ci-cd.yml
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'zulu'
+          cache: maven
+
+      - name: Build and Install API Module
+        run: |
+          ./mvnw clean install -pl open-fashion-api_v1 -am -DskipTests
+        working-directory: .
+
+      - name: Build and Test Entire Project
+        run: ./mvnw clean verify
+        working-directory: .
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: ${{ !env.ACT }}
+        with:
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+
+  #CD STAGE: Docked Build & Push (only runs on main if tests pass)
+  docker-build:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: 25
+          distribution: 'zulu'
+          cache: maven
+
+      - name: Build Application Jar
+        run: ./mvnw clean package -DskipTests
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./open-fashion-backend
+          file: ./open-fashion-backend/Dockerfile
+          push: true
+          tags: ${{secrets.DOCKER_USERNAME}}/open-fashion-backend
