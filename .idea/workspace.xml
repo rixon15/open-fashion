@@ -5,12 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90902dbb-1110-464e-84ff-fafc04ec06fe" name="Changes" comment="fixed cicd">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/java/com/openfashion/openfashionbackend/service/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/java/com/openfashion/openfashionbackend/service/implementation/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/application-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/common/V1__Create_Initial_Schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/dev/V2__Db_Seeding.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/open-fashion-api_v1/src/main/resources/openApi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-api_v1/src/main/resources/openApi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/open-fashion-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -39,6 +56,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -50,26 +70,79 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Docker.backend/docker-compose.yaml.db: Compose Deployment.executor": "Run",
+    "Docker.backend/docker-compose.yaml: Compose Deployment.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.OpenFashionBackendApplication.executor": "Run",
     "git-widget-placeholder": "greenfield-rewrite-api-first",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/szilard-ivacsony/IdeaProjects/open-fashion",
+    "last_opened_file_path": "/home/szilard-ivacsony/IdeaProjects/open-fashion/backend",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/common" />
       <recent name="$PROJECT_DIR$" />
     </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.OpenFashionBackendApplication">
+    <configuration name="OpenFashionBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="open-fashion-backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.openfashion.openfashionbackend.OpenFashionBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="backend/docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="backend/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="backend/docker-compose.yaml.db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="backend/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.backend/docker-compose.yaml.db: Compose Deployment" />
+      <item itemvalue="Docker.backend/docker-compose.yaml: Compose Deployment" />
+      <item itemvalue="Spring Boot.OpenFashionBackendApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.backend/docker-compose.yaml.db: Compose Deployment" />
+        <item itemvalue="Docker.backend/docker-compose.yaml: Compose Deployment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -87,7 +160,8 @@
       <option name="presentableId" value="Default" />
       <updated>1766429190758</updated>
       <workItem from="1766429335859" duration="2023000" />
-      <workItem from="1766444044812" duration="824000" />
+      <workItem from="1766444044812" duration="1038000" />
+      <workItem from="1766521634424" duration="9026000" />
     </task>
     <task id="LOCAL-00001" summary="fixed cicd">
       <option name="closed" value="true" />
@@ -97,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766444836703</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed cicd">
+      <option name="closed" value="true" />
+      <created>1766445036789</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1766445036789</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
