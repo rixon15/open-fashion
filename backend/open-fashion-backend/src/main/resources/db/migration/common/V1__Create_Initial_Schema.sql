@@ -89,7 +89,7 @@ CREATE TABLE product_image (
 
 
 -- ==========================================
--- 3. VARIANTS (Size, Color, SKU)
+-- 3. VARIANTS (size, Color, SKU)
 -- ==========================================
 
 CREATE TABLE color (
@@ -98,7 +98,7 @@ CREATE TABLE color (
                        hexcode VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE size (
+CREATE TABLE clothes_size (
                       id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                       name VARCHAR(10) NOT NULL
 );
@@ -107,14 +107,14 @@ CREATE TABLE product_variant (
                                  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                                  product_id BIGINT,
                                  color_id BIGINT,
-                                 size_id BIGINT,
+                                 clothes_size_id BIGINT,
                                  stock_quantity INT NOT NULL,
                                  sku VARCHAR(100) NOT NULL UNIQUE,
                                  price_override DECIMAL(10,2),
 
                                  CONSTRAINT fk_variant_product FOREIGN KEY (product_id) REFERENCES product(id),
                                  CONSTRAINT fk_variant_color FOREIGN KEY (color_id) REFERENCES color(id),
-                                 CONSTRAINT fk_variant_size FOREIGN KEY (size_id) REFERENCES size(id)
+                                 CONSTRAINT fk_variant_clothes_size FOREIGN KEY (clothes_size_id) REFERENCES clothes_size(id)
 );
 
 

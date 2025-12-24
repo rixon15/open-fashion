@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90902dbb-1110-464e-84ff-fafc04ec06fe" name="Changes" comment="fixed cicd">
-      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/java/com/openfashion/openfashionbackend/service/AuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/java/com/openfashion/openfashionbackend/service/implementation/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/application-dev.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/common/V1__Create_Initial_Schema.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/dev/V2__Db_Seeding.sql" afterDir="false" />
+    <list default="true" id="90902dbb-1110-464e-84ff-fafc04ec06fe" name="Changes" comment="Fixed docker-compose.yaml&#10;Created profiles for dev, test and prod&#10;Separated flyway config into application-dev.properties, at the moment well only need this profile for dev&#10;Fixed openApi.yaml, might need changes later on&#10;Created V1__Create_Initial_Schema.sql and V2__Db_Seeding.sql">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/open-fashion-api_v1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-api_v1/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/open-fashion-api_v1/src/main/resources/openApi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-api_v1/src/main/resources/openApi.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/open-fashion-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/common/V1__Create_Initial_Schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/open-fashion-backend/src/main/resources/db/migration/common/V1__Create_Initial_Schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +67,8 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Docker.backend/docker-compose.yaml.db: Compose Deployment.executor": "Run",
     "Docker.backend/docker-compose.yaml: Compose Deployment.executor": "Run",
+    "Maven.open-fashion-api-v1 [clean].executor": "Run",
+    "Maven.open-fashion-api-v1 [install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -91,6 +88,11 @@
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -108,7 +110,9 @@
       </method>
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="backend/docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
@@ -161,7 +165,8 @@
       <updated>1766429190758</updated>
       <workItem from="1766429335859" duration="2023000" />
       <workItem from="1766444044812" duration="1038000" />
-      <workItem from="1766521634424" duration="9026000" />
+      <workItem from="1766521634424" duration="9518000" />
+      <workItem from="1766560576855" duration="2988000" />
     </task>
     <task id="LOCAL-00001" summary="fixed cicd">
       <option name="closed" value="true" />
@@ -179,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766445036789</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed docker-compose.yaml&#10;Created profiles for dev, test and prod&#10;Separated flyway config into application-dev.properties, at the moment well only need this profile for dev&#10;Fixed openApi.yaml, might need changes later on&#10;Created V1__Create_Initial_Schema.sql and V2__Db_Seeding.sql">
+      <option name="closed" value="true" />
+      <created>1766530871776</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1766530871776</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +200,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed cicd" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed cicd" />
+    <MESSAGE value="Fixed docker-compose.yaml&#10;Created profiles for dev, test and prod&#10;Separated flyway config into application-dev.properties, at the moment well only need this profile for dev&#10;Fixed openApi.yaml, might need changes later on&#10;Created V1__Create_Initial_Schema.sql and V2__Db_Seeding.sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed docker-compose.yaml&#10;Created profiles for dev, test and prod&#10;Separated flyway config into application-dev.properties, at the moment well only need this profile for dev&#10;Fixed openApi.yaml, might need changes later on&#10;Created V1__Create_Initial_Schema.sql and V2__Db_Seeding.sql" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -414,7 +414,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Size'
+                  $ref: '#/components/schemas/Clothes_size'
     post:
       tags: [Attributes]
       summary: Add new size (Admin)
@@ -434,7 +434,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Size'
+                $ref: '#/components/schemas/Clothes_size'
         '403':
           description: Forbidden
 
@@ -867,7 +867,7 @@ components:
         color:
           $ref: '#/components/schemas/Color'
         size:
-          $ref: '#/components/schemas/Size'
+          $ref: '#/components/schemas/Clothes_size'
         stockQuantity:
           type: integer
         priceOverride:
@@ -939,7 +939,7 @@ components:
         hexcode:
           type: string
 
-    Size:
+    Clothes_size:
       type: object
       properties:
         id:
