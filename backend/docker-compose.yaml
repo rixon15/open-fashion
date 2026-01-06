@@ -15,6 +15,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  #When seting up backend service, do not forget to set the profile to prod/dev
 
 volumes:
   postgres_data:

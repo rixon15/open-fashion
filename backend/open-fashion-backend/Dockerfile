@@ -28,4 +28,5 @@ ENV JAVA_OPTS="-XX:+USESZGC -XX:+ZGenerational"
 
 EXPOSE 8080
 
+ENV SPRING_PROFILES_ACTIVE=prod
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
